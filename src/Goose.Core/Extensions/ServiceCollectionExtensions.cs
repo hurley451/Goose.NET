@@ -43,6 +43,7 @@ public static class ServiceCollectionExtensions
         // Register core services
         services.AddSingleton<IToolRegistry, ToolRegistry>();
         services.AddSingleton<ISessionManager, FileSystemSessionManager>();
+        services.AddSingleton<IGooseConfigurationManager, FileSystemConfigurationManager>();
         services.AddScoped<IConversationAgent, ConversationAgent>();
 
         return services;
@@ -86,6 +87,7 @@ public static class ServiceCollectionExtensions
         // Register core services
         services.AddSingleton<IToolRegistry, ToolRegistry>();
         services.AddSingleton<ISessionManager, FileSystemSessionManager>();
+        services.AddSingleton<IGooseConfigurationManager, FileSystemConfigurationManager>();
         services.AddScoped<IConversationAgent, ConversationAgent>();
 
         return services;

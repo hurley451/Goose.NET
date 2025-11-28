@@ -2,8 +2,10 @@
 @using Goose.Core.Models
 @using Goose.Core.Services
 @using Goose.Core.Configuration
+@using Goose.Core.Abstractions
 @inject IConversationAgent conversationAgent
 @inject IToolRegistry toolRegistry
+@inject IGooseConfigurationManager configurationManager
 @inject ILogger<Index> logger
 
 <div class="container">
@@ -63,22 +65,27 @@
     private string defaultProvider = "Anthropic";
     private string sessionDirectory = "./sessions";
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         // Log initialization
         logger.LogInformation("Initializing Goose GUI");
-        
+
         try
         {
+            // Load configuration
+            var config = await configurationManager.LoadConfigurationAsync();
+            defaultProvider = config.DefaultProvider;
+            sessionDirectory = config.SessionDirectory;
+
             // Get available tools
             var tools = toolRegistry.GetAllTools();
             toolNames = tools.Select(t => t.Name).ToList();
-            
-            logger.LogInformation($"Loaded {toolNames.Count} tools");
+
+            logger.LogInformation($"Loaded {toolNames.Count} tools and configuration");
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Error loading tools");
+            logger.LogError(ex, "Error loading tools or configuration");
         }
     }
 
@@ -137,12 +144,23 @@
     
     private async Task SaveConfiguration()
     {
-        logger.LogInformation("Saving configuration - Provider: {Provider}, SessionDir: {SessionDirectory}", 
+        logger.LogInformation("Saving configuration - Provider: {Provider}, SessionDir: {SessionDirectory}",
             defaultProvider, sessionDirectory);
-        
-        // In a real implementation, this would save to configuration file
-        // For now we'll just log that it was attempted
-        
-        await Task.CompletedTask;
+
+        try
+        {
+            var config = new GooseOptions
+            {
+                DefaultProvider = defaultProvider,
+                SessionDirectory = sessionDirectory
+            };
+
+            await configurationManager.SaveConfigurationAsync(config);
+            logger.LogInformation("Configuration saved successfully");
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error saving configuration");
+        }
     }
 }
