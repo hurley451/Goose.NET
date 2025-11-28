@@ -1,0 +1,56 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29515.74
+MinimumVisualStudioVersion = 10.0.40219.1
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goose.Core", "src\Goose.Core\Goose.Core.csproj", "{A1B2C3D4-E5F6-7890-GHIJ-KLMNOPQRSTUV}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goose.Providers", "src\Goose.Providers\Goose.Providers.csproj", "{B2C3D4E5-F678-9012-HIJK-LMNOPQRSTUVW}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goose.Tools", "src\Goose.Tools\Goose.Tools.csproj", "{C3D4E5F6-7890-1234-IJKL-MNOPQRSTUVWX}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goose.CLI", "src\Goose.CLI\Goose.CLI.csproj", "{D4E5F678-9012-3456-JKLM-NOPQRSTUVWXY}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goose.Core.Tests", "tests\Goose.Core.Tests\Goose.Core.Tests.csproj", "{E5F67890-1234-5678-KLMN-OPQRSTUVWXYA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goose.GUI", "src\Goose.GUI\Goose.GUI.csproj", "{F6789012-3456-7890-LMNOPQRSTUVWXYB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goose.API", "src\Goose.API\Goose.API.csproj", "{G7890123-4567-8901-MNOPQRSTUVWXYC}"
+EndProject
+
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AnyCPU = Debug|AnyCPU
+		Release|AnyCPU = Release|AnyCPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1B2C3D4-E5F6-7890-GHIJ-KLMNOPQRSTUV}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{A1B2C3D4-E5F6-7890-GHIJ-KLMNOPQRSTUV}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{A1B2C3D4-E5F6-7890-GHIJ-KLMNOPQRSTUV}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{A1B2C3D4-E5F6-7890-GHIJ-KLMNOPQRSTUV}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{B2C3D4E5-F678-9012-HIJK-LMNOPQRSTUVW}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{B2C3D4E5-F678-9012-HIJK-LMNOPQRSTUVW}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{B2C3D4E5-F678-9012-HIJK-LMNOPQRSTUVW}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{B2C3D4E5-F678-9012-HIJK-LMNOPQRSTUVW}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{C3D4E5F6-7890-1234-IJKL-MNOPQRSTUVWX}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{C3D4E5F6-7890-1234-IJKL-MNOPQRSTUVWX}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{C3D4E5F6-7890-1234-IJKL-MNOPQRSTUVWX}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{C3D4E5F6-7890-1234-IJKL-MNOPQRSTUVWX}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{D4E5F678-9012-3456-JKLM-NOPQRSTUVWXY}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{D4E5F678-9012-3456-JKLM-NOPQRSTUVWXY}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{D4E5F678-9012-3456-JKLM-NOPQRSTUVWXY}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{D4E5F678-9012-3456-JKLM-NOPQRSTUVWXY}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{E5F67890-1234-5678-KLMN-OPQRSTUVWXYA}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{E5F67890-1234-5678-KLMN-OPQRSTUVWXYA}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{E5F67890-1234-5678-KLMN-OPQRSTUVWXYA}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{E5F67890-1234-5678-KLMN-OPQRSTUVWXYA}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{F6789012-3456-7890-LMNOPQRSTUVWXYB}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{F6789012-3456-7890-LMNOPQRSTUVWXYB}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{F6789012-3456-7890-LMNOPQRSTUVWXYB}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{F6789012-3456-7890-LMNOPQRSTUVWXYB}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{G7890123-4567-8901-MNOPQRSTUVWXYC}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{G7890123-4567-8901-MNOPQRSTUVWXYC}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{G7890123-4567-8901-MNOPQRSTUVWXYC}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{G7890123-4567-8901-MNOPQRSTUVWXYC}.Release|AnyCPU.Build.0 = Release|AnyCPU
+	EndGlobalSection
+EndGlobal

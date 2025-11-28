@@ -1,0 +1,9 @@
+{
+  "browse_web": {
+    "type": "http",
+    "command": "http://www.google.com?",
+    "env": {
+      "search": "value"
+    }
+  }
+}

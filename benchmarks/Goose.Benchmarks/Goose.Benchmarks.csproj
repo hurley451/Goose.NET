@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Goose.Benchmarks</AssemblyName>
+    <RootNamespace>Goose.Benchmarks</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Goose.Core\Goose.Core.csproj" />
+    <ProjectReference Include="..\..\src\Goose.Providers\Goose.Providers.csproj" />
+    <ProjectReference Include="..\..\src\Goose.Tools\Goose.Tools.csproj" />
+  </ItemGroup>
+
+</Project>

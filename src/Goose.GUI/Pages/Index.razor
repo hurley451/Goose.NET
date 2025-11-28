@@ -1,0 +1,148 @@
+@page "/"
+@using Goose.Core.Models
+@using Goose.Core.Services
+@using Goose.Core.Configuration
+@inject IConversationAgent conversationAgent
+@inject IToolRegistry toolRegistry
+@inject ILogger<Index> logger
+
+<div class="container">
+    <h1>Goose.NET Chat Interface</h1>
+    
+    <div class="config-section">
+        <h2>Configuration</h2>
+        <div class="config-form">
+            <label>Default Provider:</label>
+            <select @bind="defaultProvider" class="config-input">
+                <option value="Anthropic">Anthropic</option>
+                <option value="OpenAI">OpenAI</option>
+            </select>
+            
+            <label>Session Directory:</label>
+            <input @bind="sessionDirectory" class="config-input" />
+            
+            <button @onclick="SaveConfiguration" class="save-button">Save</button>
+        </div>
+    </div>
+    
+    <div class="chat-container">
+        <div class="messages">
+            @foreach (var message in messages)
+            {
+                <div class="message @message.Role.ToString().ToLower()">
+                    <strong>@message.Role:</strong> @message.Content
+                </div>
+            }
+        </div>
+        
+        <div class="input-area">
+            <textarea @bind="userInput" placeholder="Type your message here..." class="message-input"></textarea>
+            <button @onclick="SendMessage" class="send-button">Send</button>
+        </div>
+    </div>
+    
+    <div class="tools-section">
+        <h2>Available Tools</h2>
+        <div class="tools-grid">
+            @foreach (var toolName in toolNames)
+            {
+                <div class="tool-card">
+                    <h3>@toolName</h3>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<Message> messages = new();
+    private string userInput = "";
+    private List<string> toolNames = new();
+    
+    // Configuration properties
+    private string defaultProvider = "Anthropic";
+    private string sessionDirectory = "./sessions";
+
+    protected override void OnInitialized()
+    {
+        // Log initialization
+        logger.LogInformation("Initializing Goose GUI");
+        
+        try
+        {
+            // Get available tools
+            var tools = toolRegistry.GetAllTools();
+            toolNames = tools.Select(t => t.Name).ToList();
+            
+            logger.LogInformation($"Loaded {toolNames.Count} tools");
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error loading tools");
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        if (!string.IsNullOrWhiteSpace(userInput))
+        {
+            logger.LogInformation("Sending message: {MessageContent}", userInput);
+
+            try
+            {
+                // Add user message
+                messages.Add(new Message
+                {
+                    Role = MessageRole.User,
+                    Content = userInput,
+                    Timestamp = DateTime.UtcNow
+                });
+
+                var messageText = userInput;
+                userInput = ""; // Clear input immediately
+                StateHasChanged();
+
+                // Get response from conversation agent
+                var context = new ConversationContext
+                {
+                    SessionId = "gui-session",
+                    WorkingDirectory = Environment.CurrentDirectory
+                };
+
+                var response = await conversationAgent.ProcessMessageAsync(messageText, context);
+
+                // Add assistant response
+                messages.Add(new Message
+                {
+                    Role = MessageRole.Assistant,
+                    Content = response.Content ?? "(no response)",
+                    Timestamp = DateTime.UtcNow
+                });
+
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error processing message");
+                messages.Add(new Message
+                {
+                    Role = MessageRole.System,
+                    Content = $"Error: {ex.Message}",
+                    Timestamp = DateTime.UtcNow
+                });
+                StateHasChanged();
+            }
+        }
+    }
+    
+    private async Task SaveConfiguration()
+    {
+        logger.LogInformation("Saving configuration - Provider: {Provider}, SessionDir: {SessionDirectory}", 
+            defaultProvider, sessionDirectory);
+        
+        // In a real implementation, this would save to configuration file
+        // For now we'll just log that it was attempted
+        
+        await Task.CompletedTask;
+    }
+}
